@@ -1,0 +1,53 @@
+C:\Users\Windows 10\Desktop\Trabalho PHP\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Windows 10\Desktop\Trabalho PHP\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.AssemblyInfoInputs.cache
+C:\Users\Windows 10\Desktop\Trabalho PHP\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.AssemblyInfo.cs
+C:\Users\Windows 10\Desktop\Trabalho PHP\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.csproj.CoreCompileInputs.cache
+C:\Users\Windows 10\Desktop\Trabalho PHP\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Windows 10\Desktop\Trabalho PHP\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.csproj.AssemblyReference.cache
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\appsettings.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\ChamadosTecnicos.staticwebassets.endpoints.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\ChamadosTecnicos.exe
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\ChamadosTecnicos.deps.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\ChamadosTecnicos.runtimeconfig.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\ChamadosTecnicos.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\ChamadosTecnicos.pdb
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.csproj.AssemblyReference.cache
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.AssemblyInfoInputs.cache
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.AssemblyInfo.cs
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.csproj.CoreCompileInputs.cache
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.sourcelink.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\scopedcss\bundle\ChamadosTecnicos.styles.css
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets\msbuild.ChamadosTecnicos.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets\msbuild.ChamadosTecnicos.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets\msbuild.build.ChamadosTecnicos.props
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.ChamadosTecnicos.props
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.ChamadosTecnicos.props
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\staticwebassets.pack.json
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\Chamados.958B94E2.Up2Date
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\refint\ChamadosTecnicos.dll
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.pdb
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ChamadosTecnicos.genruntimeconfig.cache
+C:\Users\joaof\Documents\Trabalho-API\ChamadosTecnicos\obj\Debug\net9.0\ref\ChamadosTecnicos.dll

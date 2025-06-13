@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Chamados Técnicos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            border-bottom-color: #3498db;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .tab:hover {
+            background-color: #f8f9fa;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button.danger {
+            background-color: #e74c3c;
+        }
+
+        button.danger:hover {
+            background-color: #c0392b;
+        }
+
+        button.success {
+            background-color: #27ae60;
+        }
+
+        button.success:hover {
+            background-color: #219a52;
+        }
+
+        button.warning {
+            background-color: #f39c12;
+        }
+
+        button.warning:hover {
+            background-color: #d68910;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-aberto { background-color: #e3f2fd; color: #1976d2; }
+        .status-emandamento { background-color: #fff3e0; color: #f57c00; }
+        .status-resolvido { background-color: #e8f5e8; color: #388e3c; }
+        .status-fechado { background-color: #fafafa; color: #616161; }
+
+        .urgente {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sistema de Chamados Técnicos</h1>
+            <p>Gerencie chamados, usuários e técnicos</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('chamados')">Chamados</button>
+            <button class="tab" onclick="showTab('usuarios')">Usuários</button>
+            <button class="tab" onclick="showTab('tecnicos')">Técnicos</button>
+        </div>
+
+        <!-- Tab Chamados -->
+        <div id="chamados" class="tab-content active">
+            <h2>Gerenciar Chamados</h2>
+            
+            <div id="chamado-form">
+                <h3>Novo Chamado</h3>
+                <form id="form-chamado">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="titulo">Título:</label>
+                            <input type="text" id="titulo" required maxlength="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="usuario">Usuário:</label>
+                            <select id="usuario" required>
+                                <option value="">Selecione um usuário</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descricao">Descrição:</label>
+                        <textarea id="descricao" required maxlength="1000"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="problema">Problema:</label>
+                            <select id="problema" required>
+                                <option value="">Selecione um problema</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="urgente"> Urgente
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="remoto"> Remoto
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit">Criar Chamado</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="tabela-chamados">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Status</th>
+                            <th>Usuário</th>
+                            <th>Técnico</th>
+                            <th>Problema</th>
+                            <th>Data Abertura</th>
+                            <th>Urgente</th>
+                            <th>Remoto</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="10" class="loading">Carregando chamados...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab Usuários -->
+        <div id="usuarios" class="tab-content">
+            <h2>Gerenciar Usuários</h2>
+            
+            <div id="usuario-form">
+                <h3>Novo Usuário</h3>
+                <form id="form-usuario">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome-usuario">Nome:</label>
+                            <input type="text" id="nome-usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-usuario">Email:</label>
+                            <input type="email" id="email-usuario" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="senha-usuario">Senha:</label>
+                        <input type="password" id="senha-usuario" required>
+                    </div>
+                    
+                    <button type="submit">Criar Usuário</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="tabela-usuarios">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4" class="loading">Carregando usuários...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab Técnicos -->
+        <div id="tecnicos" class="tab-content">
+            <h2>Gerenciar Técnicos</h2>
+            
+            <div class="table-container">
+                <table id="tabela-tecnicos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Especialidade</th>
+                            <th>Chamados Ativos</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="5" class="loading">Carregando técnicos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para atribuir técnico -->
+    <div id="modal-atribuir" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:30px; border-radius:8px; min-width:400px;">
+            <h3>Atribuir Técnico ao Chamado</h3>
+            <div class="form-group">
+                <label for="tecnico-select">Técnico:</label>
+                <select id="tecnico-select">
+                    <option value="">Selecione um técnico</option>
+                </select>
+            </div>
+            <button onclick="atribuirTecnico()">Atribuir</button>
+            <button onclick="fecharModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal para resolver chamado -->
+    <div id="modal-resolver" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:30px; border-radius:8px; min-width:500px;">
+            <h3>Resolver Chamado</h3>
+            <div class="form-group">
+                <label for="nota-atendimento">Nota de Atendimento:</label>
+                <textarea id="nota-atendimento" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tempo-gasto">Tempo Gasto:</label>
+                <input type="text" id="tempo-gasto" placeholder="Ex: 2h 30min" required>
+            </div>
+            <button onclick="resolverChamado()">Resolver</button>
+            <button onclick="fecharModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5018/api'; 
+        let chamadoAtual = null;
+        let usuarios = [];
+        let tecnicos = [];
+        let problemas = [];
+
+        // Função para mostrar abas
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            
+            if (tabName === 'chamados') {
+                carregarChamados();
+                carregarUsuarios();
+                carregarProblemas();
+                carregarTecnicos();
+        }
+    }
+        // Funções para carregar dados
+        async function carregarChamados() {
+            try {
+                const response = await fetch(`${API_BASE}/chamados`);
+                const chamados = await response.json();
+                
+                const tbody = document.querySelector('#tabela-chamados tbody');
+                tbody.innerHTML = '';
+                
+                chamados.forEach(chamado => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${chamado.id}</td>
+                        <td>${chamado.titulo}</td>
+                        <td><span class="status-badge status-${chamado.status.toLowerCase().replace(' ', '')}">${chamado.status}</span></td>
+                        <td>${chamado.usuarioNome}</td>
+                        <td>${chamado.tecnicoNome || 'Não atribuído'}</td>
+                        <td>${chamado.problemaNome}</td>
+                        <td>${new Date(chamado.dataAbertura).toLocaleDateString('pt-BR')}</td>
+                        <td>${chamado.urgente ? '<span class="urgente">SIM</span>' : 'Não'}</td>
+                        <td>${chamado.remoto ? 'SIM' : 'Não'}</td>
+                        <td>
+                            ${getAcoesChamado(chamado)}
+                            <button class="danger" onclick="excluirChamado(${chamado.id})">Excluir</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar chamados:', error);
+                mostrarErro('Erro ao carregar chamados');
+            }
+        }
+
+        function getAcoesChamado(chamado) {
+            switch (chamado.status) {
+                case 'Aberto':
+                    return `<button class="warning" onclick="abrirModalAtribuir(${chamado.id})">Atribuir Técnico</button>`;
+                case 'EmAndamento':
+                    return `<button class="success" onclick="abrirModalResolver(${chamado.id})">Resolver</button>`;
+                case 'Resolvido':
+                    return `<button onclick="fecharChamado(${chamado.id})">Fechar</button>`;
+                case 'Fechado':
+                    return '<span>Finalizado</span>';
+                default:
+                    return '';
+            }
+        }
+
+        async function carregarUsuarios() {
+            try {
+                const response = await fetch(`${API_BASE}/usuarios`);
+                usuarios = await response.json();
+                
+                // Atualizar select do formulário
+                const select = document.getElementById('usuario');
+                select.innerHTML = '<option value="">Selecione um usuário</option>';
+                usuarios.forEach(usuario => {
+                    select.innerHTML += `<option value="${usuario.id}">${usuario.nome}</option>`;
+                });
+                
+                // Atualizar tabela
+                const tbody = document.querySelector('#tabela-usuarios tbody');
+                tbody.innerHTML = '';
+                
+                usuarios.forEach(usuario => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${usuario.id}</td>
+                        <td>${usuario.nome}</td>
+                        <td>${usuario.email}</td>
+                        <td>
+                            <button onclick="verChamadosUsuario(${usuario.id})">Ver Chamados</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar usuários:', error);
+            }
+        }
+
+        async function carregarTecnicos() {
+            try {
+                const response = await fetch(`${API_BASE}/tecnicos`);
+                tecnicos = await response.json();
+                
+                // Atualizar select do modal
+                const select = document.getElementById('tecnico-select');
+                select.innerHTML = '<option value="">Selecione um técnico</option>';
+                tecnicos.forEach(tecnico => {
+                    select.innerHTML += `<option value="${tecnico.id}">${tecnico.nome} - ${tecnico.especialidade}</option>`;
+                });
+                
+                // Atualizar tabela
+                const tbody = document.querySelector('#tabela-tecnicos tbody');
+                tbody.innerHTML = '';
+                
+                for (const tecnico of tecnicos) {
+                    try {
+                        const chamadosResponse = await fetch(`${API_BASE}/tecnicos/${tecnico.id}/chamados/abertos`);
+                        const chamadosAtivos = await chamadosResponse.json();
+                        
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${tecnico.id}</td>
+                            <td>${tecnico.nome}</td>
+                            <td>${tecnico.especialidade}</td>
+                            <td>${chamadosAtivos.length}</td>
+                            <td>
+                                <button onclick="verChamadosTecnico(${tecnico.id})">Ver Chamados</button>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    } catch (error) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${tecnico.id}</td>
+                            <td>${tecnico.nome}</td>
+                            <td>${tecnico.especialidade}</td>
+                            <td>-</td>
+                            <td>
+                                <button onclick="verChamadosTecnico(${tecnico.id})">Ver Chamados</button>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar técnicos:', error);
+            }
+        }
+
+        async function carregarProblemas() {
+            try {
+                const response = await fetch(`${API_BASE}/Problemas`);
+                problemas = await response.json();                              
+                const select = document.getElementById('problema');
+                select.innerHTML = '<option value="">Selecione um problema</option>';
+                
+                problemas.forEach(problema=>{
+                  select.innerHTML += `<option value="${problema.id}">${problema.nome}</option>`;
+
+                })
+            } catch (error) {
+                console.error('Erro ao carregar problemas:', error);
+            }
+        }
+
+        // Formulários
+        document.getElementById('form-chamado').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const dados = {
+                titulo: document.getElementById('titulo').value,
+                descricao: document.getElementById('descricao').value,
+                urgente: document.getElementById('urgente').checked,
+                remoto: document.getElementById('remoto').checked,
+                usuarioId: parseInt(document.getElementById('usuario').value),
+                problemaId: parseInt(document.getElementById('problema').value)
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/chamados`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                
+                if (response.ok) {
+                    mostrarSucesso('Chamado criado com sucesso!');
+                    document.getElementById('form-chamado').reset();
+                    carregarChamados();
+                } else {
+                    mostrarErro('Erro ao criar chamado');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro ao criar chamado');
+            }
+        });
+
+        document.getElementById('form-usuario').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const dados = {
+                nome: document.getElementById('nome-usuario').value,
+                email: document.getElementById('email-usuario').value,
+                senha: document.getElementById('senha-usuario').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/usuarios`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                
+                if (response.ok) {
+                    mostrarSucesso('Usuário criado com sucesso!');
+                    document.getElementById('form-usuario').reset();
+                    carregarUsuarios();
+                } else {
+                    mostrarErro('Erro ao criar usuário');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro ao criar usuário');
+            }
+        });
+
+        // Modais
+        function abrirModalAtribuir(chamadoId) {
+            chamadoAtual = chamadoId;
+            document.getElementById('modal-atribuir').style.display = 'block';
+        }
+
+        function abrirModalResolver(chamadoId) {
+            chamadoAtual = chamadoId;
+            document.getElementById('modal-resolver').style.display = 'block';
+        }
+
+        function fecharModal() {
+            document.getElementById('modal-atribuir').style.display = 'none';
+            document.getElementById('modal-resolver').style.display = 'none';
+            chamadoAtual = null;
+        }
+
+        async function atribuirTecnico() {
+            const tecnicoId = document.getElementById('tecnico-select').value;
+            if (!tecnicoId) {
+                alert('Selecione um técnico');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/chamados/${chamadoAtual}/atender`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tecnicoId: parseInt(tecnicoId) })
+                });
+                
+                if (response.ok) {
+                    mostrarSucesso('Técnico atribuído com sucesso!');
+                    fecharModal();
+                    carregarChamados();
+                } else {
+                    mostrarErro('Erro ao atribuir técnico');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro ao atribuir técnico');
+            }
+        }
+
+        async function resolverChamado() {
+            const notaAtendimento = document.getElementById('nota-atendimento').value;
+            const tempoGasto = document.getElementById('tempo-gasto').value;
+            
+            if (!notaAtendimento || !tempoGasto) {
+                alert('Preencha todos os campos');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/chamados/${chamadoAtual}/resolver`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ notaAtendimento, tempoGasto })
+                });
+                
+                if (response.ok) {
+                    mostrarSucesso('Chamado resolvido com sucesso!');
+                    fecharModal();
+                    document.getElementById('nota-atendimento').value = '';
+                    document.getElementById('tempo-gasto').value = '';
+                    carregarChamados();
+                } else {
+                    mostrarErro('Erro ao resolver chamado');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro ao resolver chamado');
+            }
+        }
+
+        async function fecharChamado(id) {
+            if (!confirm('Deseja realmente fechar este chamado?')) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/chamados/${id}/fechar`, {
+                    method: 'PUT'
+                });
+                
+                if (response.ok) {
+                    mostrarSucesso('Chamado fechado com sucesso!');
+                    carregarChamados();
+                } else {
+                    mostrarErro('Erro ao fechar chamado');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro ao fechar chamado');
+            }
+        }
+
+        async function excluirChamado(id) {
+            if (!confirm('Deseja realmente excluir este chamado?')) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/chamados/${id}/delete`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    mostrarSucesso('Chamado excluído com sucesso!');
+                    carregarChamados();
+                } else {
+                    mostrarErro('Erro ao excluir chamado');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro ao excluir chamado');
+            }
+        }
+
+        function verChamadosUsuario(id) {
+            alert(`Funcionalidade para ver chamados do usuário ${id} será implementada`);
+        }
+
+        function verChamadosTecnico(id) {
+            alert(`Funcionalidade para ver chamados do técnico ${id} será implementada`);
+        }
+
+        function mostrarErro(mensagem) {
+            // Remove mensagens anteriores
+            document.querySelectorAll('.error, .success').forEach(el => el.remove());
+            
+            const div = document.createElement('div');
+            div.className = 'error';
+            div.textContent = mensagem;
+            document.querySelector('.container').insertBefore(div, document.querySelector('.tabs'));
+            
+            setTimeout(() => div.remove(), 5000);
+        }
+
+        function mostrarSucesso(mensagem) {
+            // Remove mensagens anteriores
+            document.querySelectorAll('.error, .success').forEach(el => el.remove());
+            
+            const div = document.createElement('div');
+            div.className = 'success';
+            div.textContent = mensagem;
+            document.querySelector('.container').insertBefore(div, document.querySelector('.tabs'));
+            
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('chamados');
+        });
+    </script>
+</body>
+</html>
